@@ -1,11 +1,13 @@
+from google.protobuf.symbol_database import Default
 import streamlit as st
 import requests, json
 from web3 import Web3
 import pandas as pd
 
 st.sidebar.header("Endpoints")
-endpoint_choices = ['Assets', 'Events', 'Rarity']
-endpoint = st.sidebar.selectbox("Choose an Endpoint", endpoint_choices)
+endpoint_choices = ['<Select Option>', 'Paginate', 'Assets', 'Events', 'Rarity']
+default = endpoint_choices.index('Assets')
+endpoint = st.sidebar.selectbox("Choose an Endpoint", endpoint_choices, index=default)
 
 st.title(f"OpenSea API Explorer - {endpoint}")
 
@@ -64,6 +66,7 @@ if endpoint == 'Events':
     
     st.write(events)
 
+# assets endpoint
 if endpoint == 'Assets':
     st.sidebar.header('Filters')
     owner = st.sidebar.text_input("Owner")
